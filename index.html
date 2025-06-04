@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>LHS Cube Club 25-26</title>
+		<link rel="stylesheet" href="styles/styles.css">
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+		<link rel="icon" type="image/png" href="images/icon_cube.png">
+	</head>
+	<body class="dark_mode light_mode">
+		<div class="top dark_mode light_mode">
+			<p class="top_text">Welcome to the LHS Cube Club Website!</p>
+			<p class="top_subtext">Use the following links to for anything you may need.</p>
+		</div>
+		<section class="head_parent">
+				<div class="head_child dark_mode light_mode">
+					<p class="head_large_text">Photo Gallary</p>
+					<p class="head_small_text">See photos and videos from our events. Also view Personal Best solves of club members with full solve breakdowns.</p>
+					<div class="head_button"><a class="button_link" href="">See More</a></div>
+				</div>
+				<div class="head_child dark_mode light_mode">
+					<p class="head_large_text">Resources</p>
+					<p class="head_small_text">Links to helpful videos, pdfs with helpful algorithims, and request for a member to review your solves for improvement.</p>
+					<div class="head_button"><a class="button_link" href="">See More</a></div>
+				</div>
+				<div class="head_child dark_mode light_mode">
+					<p class="head_large_text">Schedule</p>
+					<p class="head_small_text">See information on meet days, dates for competitions, and assistance with carpooling</p>
+					<div class="head_button"><a class="button_link" href="">See More</a></div>
+				</div>
+				<div class="head_child dark_mode light_mode">
+					<p class="head_large_text">Times</p>
+					<p class="head_small_text">Look at the school's record times as well as current rankings of cuber's times</p>
+					<div class="head_button"><a class="button_link" href="">See More</a></div>
+				</div>
+				<div class="head_child dark_mode light_mode">
+					<p class="head_large_text">Help</p>
+					<p class="head_small_text">Reach out for anything else you may need or you feel is missing from the site</p>
+					<div class="head_button"><a class="button_link" href="">See More</a></div>
+				</div>
+			<canvas id="tiles" class="dark_mode light_mode"></canvas>
+			<script src="code/tiles.js"></script>
+		</section>
+		<div class="section2">
+			<div class="section2_subsection">
+				<p class="section2_head">Latest Cubing News</p>
+				<ul class="list">
+					<li class="section2_text">Yiheng Geng set the new world record 3x3 single. The new, astonishing time was set at 3.05 seconds.
+						<a class="section2_link" href="https://speedcubing.org/blogs/news/yiheng-wang-breaks-world-record-3x3-single-with-3-08">Read More...</a>
+					</li>
+					<li class="section2_text">Gan releases the much anticipated Gan 4x4 2.0.
+						<a class="section2_link" href="https://www.gancube.com/products/gan460-m-v2-4x4-speedcube?srsltid=AfmBOopfgtgUDFCmkw8RRQ-psSnTbGMfktJN3DThMJNthQdeuUpYDOIk">Read More...</a>
+					</li>
+				</ul>
+			</div>
+			<div class="section2_subsection">
+				<p class="section2_head"> LHS Cubing Annoucements</p>
+				<ul>
+					<li class="section2_text"> LHS Cube Club Interest Meeting on TBD
+						<a class="section2_link" href="google.com">Read More...</a>
+					</li>
+					<li class="section2_text">Vote on the best shirt for our club!
+						<a class="section2_link" href="google.com">Read More...</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div class="section3">
+			<div class="section3_subsection, left">
+				<p class="section3_head">Contact Us</p>
+				<ul>
+					<li class="section3_text">Email:</li>
+					<li class="section3_text">President: Paul Robinson</li>
+					<li class="section3_text">Vice President: Keegan Bender</li>
+					<li class="section3_text">Secretary: Siddarath Damarran</li>
+				</ul>
+			</div>
+			<div class="section3_subsection, right">
+				<p class="section3_head">Rate the Website</p>
+				<ul>
+					<li class="section3_text">Email:</li>
+					<li class="section3_text">Google Form: <a class="section3_link" href="balls.html">Click Here...</a></li>
+				</ul>
+			</div>
+		</div>
+		<div class="bottom">
+			<div class="bottom_item">
+				<img class="bottom_image" src="images/icon_instagram.png">
+			</div>
+			<div class="bottom_item">
+				<p class="bottom_text">Instagram</p>
+			</div>
+			<div class="bottom_item">
+				<img class="bottom_image" src="images/icon_github.png">
+			</div>
+			<div class="bottom_item">
+				<p class="bottom_text">GitHub</p>
+			</div>
+			<div class="bottom_item">
+				<img class="bottom_image" src="images/icon_youtube.png">
+			</div>
+			<div class="bottom_item">
+				<p class="bottom_text">Youtube</p>
+			</div>
+		</div>
+		<img id="dm_toggle_button" onclick="dark_mode_toggle()" src="images/icon_dark_mode.png">
+		<script src="code/dark_mode_toggle.js"></script>
+	</body>
+</html>
