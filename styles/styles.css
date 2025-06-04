@@ -28,7 +28,7 @@ body {
 	justify-content:center;
 	flex-wrap:wrap;
 	min-height:500px;
-	max-height:1100px;
+	max-height:2000px;
 	position:relative;
 	overflow:hidden;
 }
