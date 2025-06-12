@@ -9,6 +9,11 @@ canvas.height = canvas.offsetHeight;
 //makes variables for checking window resizing
 inital_width = canvas.width;
 inital_height = canvas.offsetHeight;
+//variable that holds all the tiles
+tileset = [];
+//variable with all the color rgb values
+color_switches = [93,87,107,54,75,149,65,157,76,219,219,82,220,38,47,228,117,53];
+//class that holds the functions and variables of each tile
 class tile {
 	constructor(x,y) {
 		//the position the tile will be rendered on screen
@@ -16,86 +21,103 @@ class tile {
 		this.y = y;
 		//variables for the currently displayed rgb values
 		this.current_color = [0,0,0];
+		//picks the current color
+		var random = Math.floor(Math.random()*6);
+		for(var a=0;a<3;a++) {
+			this.current_color[a] = color_switches[random*3+a];
+		}
 		//variables for the next color value
 		this.target_color = [0,0,0];
+		//variables in charge of whether the tile is done changing colors
+		this.finished = [false,false,false];
+		this.values_reached = 0;
 		//variable decides if the tile will fade into the target color
 		this.active = false;
-		//variable is used to tell if the tile is done fading into the next color
-		this.values_reached = 0;
 	}
+	//picks a new color and resets the variables for color switching
 	pick_new_color() {
-		new_color_int = Math.floor(Math.random()*6);
-		for(i=0;i<3;i++) {
-			this.target_color[i] = color_switches[new_color_int*3+i];
+		//resets the variables
+		this.finished = [false,false,false];
+		this.values_reached = 0;
+		this.active = false;
+		//picks a new tile
+		var new_tile = tileset[0];
+		while (new_tile.active == true) {
+			new_tile = tileset[Math.floor(Math.random()*tileset.length)];
+		}
+		new_tile.active = true;
+		//picks the current tile's next color
+		var random = Math.floor(Math.random()*6);
+		for(var a=0;a<3;a++) {
+			this.target_color[a] = color_switches[random*3+a];
 		}
 	}
+	//function that updates every frame
+	update() {
+		//determines whether the tile is currently chaging colors
+		if (this.active == true) {
+			for (var b=0;b<3;b++) {
+				//updates the color to go closer to the target color
+				if (this.finished[b] == false) {
+					if (this.current_color[b] < this.target_color[b]) {
+						this.current_color[b]+=1;
+					}
+					if (this.current_color[b] > this.target_color[b]) {
+						this.current_color[b]-=1;
+					}
+					if (this.current_color[b] == this.target_color[b]) {
+						this.finished[b] = true;
+						this.values_reached+=1;
+						//if the tile's rgb values equal the target the next color is picked
+						if (this.values_reached == 3) {
+							this.pick_new_color();
+						}
+					}
+				}
+			}
+		}
+		//renders the tile
+		this.draw();
+	}
+	//draws the tile
 	draw() {
 		ctx.fillStyle = "rgb("+this.current_color[0]+","+this.current_color[1]+","+this.current_color[2]+")";
 		ctx.beginPath();
-		ctx.roundRect(x,y,45,45,10);
+		ctx.roundRect(this.x,this.y,45,45,10);
 		ctx.fill();
 	}
-	update() {
-		f
-	}
 }
-//sets the tiles
-tiles = [];
-const colors = ["rgb(93,87,107)","rgb(54,75,149)","rgb(65,157,76)","rgb(219,219,82)","rgb(220,38,47)","rgb(228,117,53)"];
-//draws the inital render of tiles
-draw_tile();
-const color_switches = [93,87,107,54,75,149,65,157,76,219,219,82,220,38,47,228,117,53];
-//inital blocks
-for(i=0;i<(Math.floor(canvas.width/50)+1)*6;i++) {
-	tile = Math.floor(Math.random()*6);
-	tiles.push(tile);
-}
-//makes sure any resizes updates the tile effect
-window.onresize = update_tiles;
-//fills in a block at a desired area and dimension 
-function block(x,y,w,h) {
-	pick_color();
-	//ctx.fillRect(x,y,w,h);  *alternate square version to do the tiles
-	ctx.beginPath();
-	ctx.roundRect(x,y,w,h,10);
-	ctx.fill();
-}
-//randomly picks one of six colors that are on a standard rubix's cube
-function pick_color() {
-	current_color = "#5d576b";
-	c_int = Math.floor(Math.random()*6);
-	switch(c_int) {
-		case 0:
-			current_color = ("rgb(93,87,107)");//Grey Hex: #5D576B
-			break;
-		case 1:
-			current_color = ("rgb(54,75,149)");//Blue Hex: #364a95
-			break;
-		case 2:
-			current_color = ("rgb(65,157,76)");//Green Hex: #419d4c
-			break;
-		case 3:
-			current_color = ("rgb(219,219,82)");//Yellow Hex: #DBDB52
-			break;
-		case 4:
-			current_color = ("rgb(220,38,47)");//Red Hex: #DC262E
-			break;
-		case 5:
-			current_color = ("rgb(228,117,53)");//orange Hex: #E47635
-	}
-	ctx.fillStyle = current_color;
-}
-//updates the tiles
-function update_tiles() {
+//makes the tileset fit the canvas size and fill it up with tiles 
+function update_tileset() { 
+	//sets the dimensions of the canvas so there's no warping
 	canvas.width = window.innerWidth;
 	canvas.height = canvas.offsetHeight;
-	draw_tile();
-}
-//draws the tiles from one end of the screen to the other
-function draw_tile() {
+	//makes all the tiles and makes them pick a color
 	for (i=0;i<Math.floor(canvas.height/50)+1;i++) {
-		for (j=0;j<(Math.floor(canvas.width/50)+1);j++) {
-			block(j*50+5,i*50+5,45,45);
+		for (j=0;j<Math.floor(canvas.width/50)+1;j++) {
+			t = new tile(j*50+5,i*50+5);
+			tileset[i*(Math.floor(canvas.width/50)+1)+j] = t;
+			tileset[i*(Math.floor(canvas.width/50)+1)+j].pick_new_color();
 		}
 	}
+	//picks a few random tiles to change their colors
+	for (i=0;i<Math.floor(tileset.length/20)+1;i++) {
+		tileset[Math.floor(Math.random()*tileset.length)].active = true;
+	}
 }
+//draws the tiles on the screen
+function draw() {
+	//checks for window resizes and updates the tiles accordingly
+	if (window.innerWidth != canvas.width) {
+		update_tileset();
+	}
+	for (i=0;i<Math.floor(canvas.height/50)+1;i++) {
+		for (j=0;j<Math.floor(canvas.width/50)+1;j++) {
+			tileset[i*(Math.floor(canvas.width/50)+1)+j].update();
+		}
+	}
+	window.requestAnimationFrame(draw);
+}
+window.requestAnimationFrame(draw);
+//makes the tiles at the first frame of the website
+update_tileset();
