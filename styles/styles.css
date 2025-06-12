@@ -30,7 +30,6 @@ body {
 	min-height:500px;
 	max-height:2000px;
 	position:relative;
-	overflow:hidden;
 }
 .head_child {
 	width: 12.5em;
