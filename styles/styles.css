@@ -142,6 +142,11 @@ body {
 	text-align: center;
 	text-decoration: none;
 }
+.hidden {
+	height:0;
+	width:0;
+	opacity: 0;
+}
 .section3 {
 	display:flex;
 	justify-content: center;
