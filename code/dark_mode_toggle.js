@@ -1,3 +1,13 @@
+const fullPath = window.location.pathname;
+const directoryPath = fullPath.substring(0, fullPath.lastIndexOf('/'));
+if (directoryPath == "/html") {
+	src_light_mode = "../images/icon_light_mode.png";
+	src_dark_mode = "../images/icon_dark_mode.png";
+}
+else {
+	src_light_mode = "images/icon_light_mode.png";
+	src_dark_mode = "images/icon_dark_mode.png";
+}
 //variable for keeping track of the current mode
 var image = document.getElementById("dm_toggle_button");
 image.src = "images/icon_light_mode.png";
@@ -11,7 +21,7 @@ if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').match
 	}
 	dark_mode = true;
 	var image = document.getElementById("dm_toggle_button");
-	image.src = "images/icon_dark_mode.png";
+	image.src = src_dark_mode;
 	dark_mode = true;
 }
 //automatically switches the websites theme if the user changes their own default theme
@@ -29,12 +39,12 @@ function dark_mode_toggle() {
 	}
 	if (dark_mode == true) {
 		var image = document.getElementById("dm_toggle_button");
-		image.src = "images/icon_light_mode.png";
+		image.src = src_light_mode;
 		dark_mode = false;
 	}
 	else {
 		var image = document.getElementById("dm_toggle_button");
-		image.src = "images/icon_dark_mode.png";
+		image.src = src_dark_mode;
 		dark_mode = true;
 	}
 }
