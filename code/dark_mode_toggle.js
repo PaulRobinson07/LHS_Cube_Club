@@ -1,6 +1,6 @@
 const fullPath = window.location.pathname;
 const directoryPath = fullPath.substring(0, fullPath.lastIndexOf('/'));
-if (directoryPath == "/html") {
+if (directoryPath == "/LHS_Cube_Club/html") {
 	src_light_mode = "../images/icon_light_mode.png";
 	src_dark_mode = "../images/icon_dark_mode.png";
 }
