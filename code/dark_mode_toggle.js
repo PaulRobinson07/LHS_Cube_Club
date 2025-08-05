@@ -1,6 +1,8 @@
+//gets the path to the current directory
 const fullPath = window.location.pathname;
 const directoryPath = fullPath.substring(0, fullPath.lastIndexOf('/'));
-if (directoryPath == "/LHS_Cube_Club/html") {
+//gets the images from the correct location based on the current directory
+if (directoryPath == "/LHS_Cube_Club/html" || "/html") {
 	src_light_mode = "../images/icon_light_mode.png";
 	src_dark_mode = "../images/icon_dark_mode.png";
 }
